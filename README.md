@@ -1,7 +1,7 @@
 # crash-out-vaults
 Web 3 dApp. Enjoyable RPG with potential earning/staking.
 
-## Vault Wars — Alpha 0.4
+## Vault Wars — Alpha 0.5
 Free, local gameplay demonstration. No real payouts, staking, token transfers, or deployed smart contracts.
 
 ### Run
@@ -29,3 +29,6 @@ Never commit private keys, seed phrases or service credentials. Do not treat loc
 
 ## Deployment
 Vercel configuration runs regression tests before building the static `dist/` directory. Import the repository into the intended Vercel team, run a preview build, test it, and only then publish. A signed Farcaster manifest requires the final domain and account owner's authorization. Selected workspace: crashoutcrypto. Vercel project creation remains blocked by the workspace billing suspension (402 on retry after the reported payment update); no live deployment or signed manifest has been created yet.
+
+### Alpha 0.5: server-authoritative development mode
+Run `npm run dev:server` and open http://127.0.0.1:8080. The separate server-backed UI sends only an action, optional choice and expected revision. The server owns progression, class and equipment rules, UTC resets, and claims. A random HttpOnly session cookie identifies a local save; state is stored in ignored .local-data files with atomic replacement. Concurrent/stale requests fail revision checks. Browser saves from the static demo are deliberately not imported. The static Vercel preview remains Alpha 0.4 gameplay and is not server-backed. This is a single-process loopback development server, not a production service. Before cloud use, implement durable transactional database storage, verified wallet/Farcaster identity, request rate limits, abuse detection, and server-side monitoring; no financial claims may use this prototype.
