@@ -1,14 +1,14 @@
 # crash-out-vaults
 Web 3 dApp. Enjoyable RPG with potential earning/staking.
 
-## Vault Wars — Alpha 0.1
+## Vault Wars — Alpha 0.2
 Free, local gameplay demonstration. No real payouts, staking, token transfers, or deployed smart contracts.
 
 ### Run
 Open `index.html` in a modern browser, or run `python -m http.server 8080` from the repository directory and visit http://localhost:8080. For wallet testing, use a compatible injected EIP-1193 wallet on a trusted HTTPS deployment. No install or build is required.
 
 ### Gameplay
-Choose Paladin, Assassin, or Warlock. Win dungeons for 20 points and 40 XP; defeat the weekly Hollow King (unlocked at level 2) for 60 points and 100 XP. Every 100 XP increases your level. At 100 weekly points, claim one fictional equipment upgrade. Weekly reset is Monday 00:00 UTC. Level and equipment persist locally. Progress is stored in browser localStorage, is editable, and never qualifies for monetary rewards.
+Choose Paladin, Assassin, or Warlock. Win dungeons for 20 points and 40 XP; defeat the weekly Hollow King (unlocked at level 2) for 60 points and 100 XP. Every 100 XP increases your level. At 100 weekly points, claim one fictional equipment upgrade. Weekly reset is Monday 00:00 UTC. Level and equipment persist locally. Alpha 0.2 adds weapons, armor and relics that modify combat stats. Daily quests: clear 3 dungeons (+15 contribution) and use 5 class skills (+10 contribution). Claim each once per UTC day. Gear can be equipped outside combat; existing v0.1 local saves migrate using defaults for new fields. Progress is stored in browser localStorage, is editable, and never qualifies for monetary rewards.
 
 ### Base configuration
 - Mainnet chain ID: 8453
