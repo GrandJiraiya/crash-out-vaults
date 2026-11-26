@@ -1,0 +1,12 @@
+{
+  "name": "crash-out-vaults",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/game.test.cjs"
+  },
+  "dependencies": {
+    "@farcaster/miniapp-sdk": "0.4.0"
+  }
+}
