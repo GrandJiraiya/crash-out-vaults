@@ -1,7 +1,7 @@
 # crash-out-vaults
 Web 3 dApp. Enjoyable RPG with potential earning/staking.
 
-## Vault Wars — Alpha 0.6
+## Vault Wars — Alpha 0.7
 Free, local gameplay demonstration. No real payouts, staking, token transfers, or deployed smart contracts.
 
 ### Run
@@ -36,3 +36,6 @@ Run `npm run dev:server` and open http://127.0.0.1:8080. The separate server-bac
 ### Alpha 0.6: dedicated Supabase development database
 Project ref: hjyxzugqkihtlewculpu (US East Ohio), URL https://hjyxzugqkihtlewculpu.supabase.co. Migration `20261126222112_vault_player_state_and_atomic_action_log.sql` is applied. Both tables have RLS; authenticated users may read only their own state and cannot mutate it. The action log is intentionally inaccessible to clients; the security advisor reports an informational no-policy notice for it. Only service_role can invoke the atomic compare-and-swap function. A nonexistent-player commit returned false in hosted SQL verification.
 The server-only `server/supabase-store.cjs` adapter validates the user's Supabase access token with Auth, derives user identity from the response, rejects anonymous accounts and uses the engine to calculate changes before atomic commit. Configure the URL, publishable key and a server-only legacy service-role JWT when wiring a hosted API; never commit credentials. The adapter is not yet wired to a public endpoint or UI, and its tests mock HTTP. Auth providers, actual user end-to-end testing, rate limits and rankings remain pending. No real money, token locking or payouts are enabled.
+
+### Alpha 0.7: authenticated cloud alpha
+Supabase Edge Function `vault-game` is deployed with JWT verification enabled. Source: `supabase/functions/vault-game/index.js`. It verifies the user with Supabase Auth on each request, accepts only action/choice/revision, enforces a 2 KB request limit and calls the transactional storage adapter. No secrets are included in the frontend. Test the cloud UI by running `python -m http.server 8080 --bind 127.0.0.1` from the repo and opening http://127.0.0.1:8080/cloud.html. Email/password signup and login require the corresponding Supabase Auth provider and confirmation configuration. Access tokens remain in memory; sign in again after reload. Allowed origins default to localhost:8080 and 127.0.0.1:8080; set the server-only VAULT_ALLOWED_ORIGINS to approved HTTPS origins before a hosted release. The function uses default legacy Supabase keys inside the Edge runtime only. Cloud login and live persistence are not end-to-end verified yet. Wallet ownership, Farcaster identity, rate limiting, public leaderboards and monetary payouts remain disabled or unimplemented. The edge engine is a bundled snapshot of the local engine and adapter; keep them synchronized when editing.
