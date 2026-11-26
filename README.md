@@ -1,7 +1,7 @@
 # crash-out-vaults
 Web 3 dApp. Enjoyable RPG with potential earning/staking.
 
-## Vault Wars — Alpha 0.7
+## Vault Wars — Alpha 0.8
 Free, local gameplay demonstration. No real payouts, staking, token transfers, or deployed smart contracts.
 
 ### Run
@@ -39,3 +39,6 @@ The server-only `server/supabase-store.cjs` adapter validates the user's Supabas
 
 ### Alpha 0.7: authenticated cloud alpha
 Supabase Edge Function `vault-game` is deployed with JWT verification enabled. Source: `supabase/functions/vault-game/index.js`. It verifies the user with Supabase Auth on each request, accepts only action/choice/revision, enforces a 2 KB request limit and calls the transactional storage adapter. No secrets are included in the frontend. Test the cloud UI by running `python -m http.server 8080 --bind 127.0.0.1` from the repo and opening http://127.0.0.1:8080/cloud.html. Email/password signup and login require the corresponding Supabase Auth provider and confirmation configuration. Access tokens remain in memory; sign in again after reload. Allowed origins default to localhost:8080 and 127.0.0.1:8080; set the server-only VAULT_ALLOWED_ORIGINS to approved HTTPS origins before a hosted release. The function uses default legacy Supabase keys inside the Edge runtime only. Cloud login and live persistence are not end-to-end verified yet. Wallet ownership, Farcaster identity, rate limiting, public leaderboards and monetary payouts remain disabled or unimplemented. The edge engine is a bundled snapshot of the local engine and adapter; keep them synchronized when editing.
+
+### Alpha 0.8: opt-in weekly rankings
+Hosted migration `20261126222838_vault_weekly_opt_in_leaderboard.sql` adds a server-only weekly score table synchronized by a database trigger from validated player state, and restricted RPCs for rankings and opt-in. Rankings use Monday 00:00 UTC, show the top 50 eligible positive-score adventurers, use shared rank for tied points and show a random per-week alias, class, level and points (not account IDs or emails). Players can leave the listing and must rejoin each week. Historical score rows are retained privately; no payout is associated with ranks. Edge Function vault-game version 2 serves authenticated ranking reads and opt-in controls; cloud.html includes the UI. SQL checks confirmed RLS, denied direct client access and the empty leaderboard response. Two informational no-policy advisor notices are expected for private tables. Mocked API tests do not replace authenticated hosted browser testing; wallet/Farcaster identity, rate limits, public deployment and money features are still pending.
