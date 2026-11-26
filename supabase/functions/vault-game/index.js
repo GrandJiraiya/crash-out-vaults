@@ -84,6 +84,7 @@ function createStore({url,serverKey,publishableKey,fetcher=fetch}){
   if(ok!==true)throw Object.assign(Error('Stale revision; reload player state'),{status:409});
  }
  return {
+  async leaderboard(token,listed){const id=await identity(token);if(listed!==undefined){if(typeof listed!=='boolean')throw Object.assign(Error('Invalid listing choice'),{status:400});const ok=await request('/rest/v1/rpc/vault_set_listing',{method:'POST',body:JSON.stringify({p_user:id,p_listed:listed})});if(ok!==true)throw Object.assign(Error('Choose a character and refresh current week first'),{status:400})}return request('/rest/v1/rpc/vault_get_leaderboard',{method:'POST',body:JSON.stringify({p_user:id})})},
   async getState(token){const id=await identity(token),now=Date.now(),s=await load(id,now);const next=structuredClone(s);rollover(next,now);if(next.day!==s.day||next.week!==s.week){next.revision++;await commit(id,s,next,'rollover');return next}return s},
   async act(token,command){const id=await identity(token),now=Date.now(),s=await load(id,now);const next=apply(s,command,now);await commit(id,s,next,command.action);return next}
  };
@@ -104,13 +105,14 @@ Deno.serve(async req=>{
  if(!token)return reply(401,{error:'Authentication required'});
  try{
  const store=createStore({url:Deno.env.get('SUPABASE_URL'),serverKey:Deno.env.get('SUPABASE_SERVICE_ROLE_KEY'),publishableKey:Deno.env.get('SUPABASE_ANON_KEY')});
- if(req.method==='GET')return reply(200,{state:await store.getState(token)});
+ if(req.method==='GET'){if(new URL(req.url).searchParams.get('view')==='leaderboard')return reply(200,{leaderboard:await store.leaderboard(token)});return reply(200,{state:await store.getState(token)})}
  if(req.headers.get('content-type')?.split(';')[0]!=='application/json')return reply(415,{error:'JSON required'});
  const reader=req.body?.getReader();if(!reader)return reply(400,{error:'Missing command'});
  const chunks=[];let count=0;
  while(true){const {done,value}=await reader.read();if(done)break;count+=value.byteLength;if(count>2048){await reader.cancel();return reply(413,{error:'Command too large'})}chunks.push(value)}
  const bytes=new Uint8Array(count);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength}
  let command;try{command=JSON.parse(new TextDecoder().decode(bytes))}catch{return reply(400,{error:'Invalid JSON'})}
+ if(command?.action==='leaderboard_listing')return reply(200,{leaderboard:await store.leaderboard(token,command.listed===true?true:command.listed===false?false:null)});
  return reply(200,{state:await store.act(token,command)});
  }catch(e){return reply([400,401,409,502].includes(e.status)?e.status:500,{error:[400,401,409].includes(e.status)?e.message:'Service unavailable'})}
 });
