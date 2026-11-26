@@ -1,7 +1,7 @@
 # crash-out-vaults
 Web 3 dApp. Enjoyable RPG with potential earning/staking.
 
-## Vault Wars — Alpha 0.8
+## Vault Wars — Alpha 0.9
 Free, local gameplay demonstration. No real payouts, staking, token transfers, or deployed smart contracts.
 
 ### Run
@@ -42,3 +42,6 @@ Supabase Edge Function `vault-game` is deployed with JWT verification enabled. S
 
 ### Alpha 0.8: opt-in weekly rankings
 Hosted migration `20261126222838_vault_weekly_opt_in_leaderboard.sql` adds a server-only weekly score table synchronized by a database trigger from validated player state, and restricted RPCs for rankings and opt-in. Rankings use Monday 00:00 UTC, show the top 50 eligible positive-score adventurers, use shared rank for tied points and show a random per-week alias, class, level and points (not account IDs or emails). Players can leave the listing and must rejoin each week. Historical score rows are retained privately; no payout is associated with ranks. Edge Function vault-game version 2 serves authenticated ranking reads and opt-in controls; cloud.html includes the UI. SQL checks confirmed RLS, denied direct client access and the empty leaderboard response. Two informational no-policy advisor notices are expected for private tables. Mocked API tests do not replace authenticated hosted browser testing; wallet/Farcaster identity, rate limits, public deployment and money features are still pending.
+
+### Alpha 0.9: wallet ownership linking (development)
+Migration `20261126223121_vault_wallet_ownership_challenges.sql` and Edge Function `vault-wallet` are live. Signed-in, non-anonymous players can request a five-minute, single-use challenge scoped to their account, wallet and allowed browser origin, with a 30-second issuance cooldown. Verification uses viem 2.37.9 on Base via a read-only RPC; one wallet per account and unique wallet ownership are enforced by the database. The cloud UI uses personal_sign, not transactions or approvals. Read-only balance uses the user-supplied token contract and is informational only; identity of the token and actual balances still need live verification. Wallet changes/recovery, wallet-only SIWE login, Farcaster identity and holder perks are not implemented. This is a custom account-linking message, not a SIWE session. The Edge dependency is pinned but transitive lockfile and dependency audit remain outstanding. The endpoint allows localhost development origins only unless configured. Actual wallet signatures, Coinbase smart wallets, hosted auth and RPC responses need end-to-end testing; mocked regression checks do not establish cryptographic correctness. Do not use this for payments or monetary eligibility.
