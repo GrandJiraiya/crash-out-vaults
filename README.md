@@ -1,7 +1,7 @@
 # crash-out-vaults
 Web 3 dApp. Enjoyable RPG with potential earning/staking.
 
-## Vault Wars — Alpha 0.5
+## Vault Wars — Alpha 0.6
 Free, local gameplay demonstration. No real payouts, staking, token transfers, or deployed smart contracts.
 
 ### Run
@@ -32,3 +32,7 @@ Vercel configuration runs regression tests before building the static `dist/` di
 
 ### Alpha 0.5: server-authoritative development mode
 Run `npm run dev:server` and open http://127.0.0.1:8080. The separate server-backed UI sends only an action, optional choice and expected revision. The server owns progression, class and equipment rules, UTC resets, and claims. A random HttpOnly session cookie identifies a local save; state is stored in ignored .local-data files with atomic replacement. Concurrent/stale requests fail revision checks. Browser saves from the static demo are deliberately not imported. The static Vercel preview remains Alpha 0.4 gameplay and is not server-backed. This is a single-process loopback development server, not a production service. Before cloud use, implement durable transactional database storage, verified wallet/Farcaster identity, request rate limits, abuse detection, and server-side monitoring; no financial claims may use this prototype.
+
+### Alpha 0.6: dedicated Supabase development database
+Project ref: hjyxzugqkihtlewculpu (US East Ohio), URL https://hjyxzugqkihtlewculpu.supabase.co. Migration `20261126222112_vault_player_state_and_atomic_action_log.sql` is applied. Both tables have RLS; authenticated users may read only their own state and cannot mutate it. The action log is intentionally inaccessible to clients; the security advisor reports an informational no-policy notice for it. Only service_role can invoke the atomic compare-and-swap function. A nonexistent-player commit returned false in hosted SQL verification.
+The server-only `server/supabase-store.cjs` adapter validates the user's Supabase access token with Auth, derives user identity from the response, rejects anonymous accounts and uses the engine to calculate changes before atomic commit. Configure the URL, publishable key and a server-only legacy service-role JWT when wiring a hosted API; never commit credentials. The adapter is not yet wired to a public endpoint or UI, and its tests mock HTTP. Auth providers, actual user end-to-end testing, rate limits and rankings remain pending. No real money, token locking or payouts are enabled.
