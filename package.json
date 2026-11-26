@@ -1,6 +1,6 @@
 {
   "name": "crash-out-vaults",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "private": true,
   "scripts": {
     "build": "node scripts/build.mjs",
