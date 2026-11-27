@@ -12,3 +12,5 @@
 .treasury-preview{display:grid;gap:14px}.treasury-preview h2{margin:0}.treasury-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.treasury-grid strong{display:block;font-size:clamp(16px,3vw,23px);overflow-wrap:anywhere}.treasury-grid small{display:block;color:var(--muted);font-size:11px}.treasury-preview .status-note{margin:0;border-left-color:#d4af60}
 
 .testnet-check{display:grid;gap:10px;background:#10151f;padding:16px}.testnet-check h2{font-size:21px}.testnet-check .status-note{overflow-wrap:anywhere}
+
+.sim-accounting{display:grid;gap:12px;padding:16px;background:#10151f}.sim-accounting h2{font-size:21px}.sim-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sim-inputs label{display:grid;gap:4px;font-size:13px;color:var(--muted)}.sim-inputs input{margin:0}.sim-accounting table{min-width:500px}.sim-accounting .status-note{margin:0}@media(max-width:350px){.sim-inputs{grid-template-columns:1fr}}
