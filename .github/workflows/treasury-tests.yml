@@ -1,0 +1,27 @@
+name: Treasury local EVM
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'contracts/**'
+      - '.github/workflows/treasury-tests.yml'
+  pull_request:
+    paths:
+      - 'contracts/**'
+      - '.github/workflows/treasury-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  treasury:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - run: npm test
