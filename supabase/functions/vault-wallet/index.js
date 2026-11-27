@@ -1,7 +1,7 @@
 import {createPublicClient,http} from 'npm:viem@2.37.9';
 import {base} from 'npm:viem@2.37.9/chains';
 const chain=createPublicClient({chain:base,transport:http(Deno.env.get('VAULT_BASE_RPC_URL')||'https://mainnet.base.org',{timeout:8000,retryCount:0})});
-const origins=new Set(['http://localhost:8080','http://127.0.0.1:8080',...(Deno.env.get('VAULT_ALLOWED_ORIGINS')||'').split(',').map(s=>s.trim()).filter(Boolean)]);
+const origins=new Set(['https://crash-out-vaults-9npv1gqhq-crashoutcrypto.vercel.app','https://crash-out-vaults-crashoutcrypto.vercel.app','http://localhost:8080','http://127.0.0.1:8080',...(Deno.env.get('VAULT_ALLOWED_ORIGINS')||'').split(',').map(s=>s.trim()).filter(Boolean)]);
 const addressPattern=/^0x[0-9a-f]{40}$/;
 const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const tokenAddress='0xf7914587e79d23117ba5f4f9848d508d09fc4b99';
