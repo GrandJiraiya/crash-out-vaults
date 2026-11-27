@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+ <linearGradient id="steel" x2="1" y2="1"><stop stop-color="#83939e"/><stop offset=".27" stop-color="#3a4856"/><stop offset=".55" stop-color="#171d27"/><stop offset=".8" stop-color="#55606c"/><stop offset="1" stop-color="#151820"/></linearGradient>
+ <linearGradient id="gold" x2=".8" y2="1"><stop stop-color="#fff1b4"/><stop offset=".35" stop-color="#d4af60"/><stop offset=".72" stop-color="#81532c"/><stop offset="1" stop-color="#e9ca80"/></linearGradient>
+ <linearGradient id="cloth" x2="0" y2="1"><stop stop-color="#394250"/><stop offset="1" stop-color="#080b11"/></linearGradient>
+ <radialGradient id="amber"><stop stop-color="#e8bd69" stop-opacity=".62"/><stop offset=".55" stop-color="#7c4d28" stop-opacity=".23"/><stop offset="1" stop-color="#0b0d12" stop-opacity="0"/></radialGradient>
+ <radialGradient id="red"><stop stop-color="#c84a52" stop-opacity=".48"/><stop offset="1" stop-color="#0b0d12" stop-opacity="0"/></radialGradient>
+ <radialGradient id="purple"><stop stop-color="#9872ee" stop-opacity=".6"/><stop offset="1" stop-color="#0b0d12" stop-opacity="0"/></radialGradient>
+ <linearGradient id="voidsteel" x2="1" y2="1"><stop stop-color="#655885"/><stop offset=".48" stop-color="#242337"/><stop offset="1" stop-color="#11121d"/></linearGradient>
+ <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#3b3e48"/><stop offset="1" stop-color="#10121a"/></linearGradient>
+ <symbol id="frame" viewBox="0 0 240 300"><path d="M12 54V20L32 8h176l20 12v34M12 246v34l20 12h176l20-12v-34" fill="none" stroke="#c5a16a" stroke-opacity=".45"/><path d="M12 12h18L12 30Zm216 0h-18l18 18ZM12 288h18l-18-18Zm216 0h-18l18-18Z" fill="#bfa06b" opacity=".55"/></symbol>
+ <symbol id="portrait-paladin" viewBox="0 0 240 300">
+ <rect width="240" height="300" fill="#11151d"/><ellipse cx="120" cy="114" rx="117" ry="135" fill="url(#amber)"/>
+ <g fill="none" stroke="#b89a64" opacity=".36"><circle cx="120" cy="100" r="63"/><circle cx="120" cy="100" r="69" stroke-dasharray="2 8"/><path d="m120 19 81 81-81 81-81-81Z"/></g>
+ <path d="M82 115 37 142 18 290h204l-23-148-42-27" fill="#2b2530" stroke="#493f38"/>
+ <path d="m81 115-47 26-13 42 43 10 29-28 54 1 29 26 44-11-14-40-47-26Z" fill="url(#steel)" stroke="url(#gold)" stroke-width="3"/>
+ <path d="m72 131-35 12-9 26 32 8 22-26m86-20 35 12 9 26-32 8-22-26" fill="#53616b" stroke="#c5a16a" stroke-width="2"/>
+ <path d="m89 143 31-13 31 13 18 60-19 69H90l-20-69Z" fill="url(#steel)" stroke="#d4af60" stroke-width="2"/>
+ <path d="m120 152 27 20-27 30-27-30Z" fill="#171b24" stroke="#e3c67c" stroke-width="2"/><path d="M120 158v37m-13-23h26" stroke="#f5dc99" stroke-width="3"/>
+ <path d="M86 69 98 45l22-10 22 10 12 24-4 43-30 25-30-25Z" fill="url(#steel)" stroke="#e1bb6d" stroke-width="2.5"/><path d="m86 69 34-22 34 22-12 16-22-7-22 7Z" fill="url(#gold)"/><path d="M93 89 120 96l27-7-4 13-23 7-23-7Z" fill="#090b0e"/><path d="m99 94 14 4m14 0 14-4" stroke="#f8dc92" stroke-width="2"/><path d="m120 79-5 34 5 9 5-9Z" fill="#b99a60"/>
+ <path d="m27 203 37-15 37 15v44l-37 38-37-38Z" fill="#1c2634" stroke="url(#gold)" stroke-width="4"/><path d="m64 200 25 11v31l-25 28-25-28v-31Z" fill="url(#steel)" stroke="#9a7a47"/><path d="M64 209v45m-16-29h32" stroke="#e5c887" stroke-width="4"/>
+ <path d="m180 208 8-82 7-16 6 17-4 83m-20 0h26" fill="url(#gold)" stroke="#c6a36a" stroke-width="2"/><use href="#frame"/>
+ </symbol>
+ <symbol id="portrait-assassin" viewBox="0 0 240 300">
+ <rect width="240" height="300" fill="#101218"/><ellipse cx="120" cy="110" rx="116" ry="130" fill="url(#red)"/><g opacity=".35" stroke="#b85a65" fill="none"><circle cx="120" cy="98" r="63"/><path d="m20 125 100-97 100 97M45 57l150 85M195 57 45 142"/></g>
+ <path d="m73 108-42 42-17 140h212l-19-142-41-40Z" fill="url(#cloth)" stroke="#493a42" stroke-width="2"/>
+ <path d="m80 130-37 24-13 38 43-15 17-23m70-24 37 24 13 38-43-15-17-23" fill="url(#steel)" stroke="#8d5360" stroke-width="2"/>
+ <path d="m81 145 39 15 39-15 18 53-25 86H88l-25-86Z" fill="#1a202b" stroke="#4e5460"/><path d="m74 157 91 75m3-75-92 75" stroke="#815a45" stroke-width="10"/><path d="m74 157 91 75m3-75-92 75" stroke="#c4a07d" stroke-width="1"/>
+ <path d="M74 101 78 65l42-34 42 34 4 36-17 32-29 13-29-13Z" fill="url(#cloth)" stroke="#8e5360" stroke-width="2"/><path d="m120 46-30 39 6 31 24 18 24-18 6-31Z" fill="#080c13"/><path d="m95 94 18 5-16 4m48-9-18 5 16 4" fill="#f28491"/><path d="m91 112 29-8 29 8-11 24-18 8-18-8Z" fill="#30303b" stroke="#4d454d"/>
+ <path d="m33 253 36-70-8-20-14 13-24 72m184 5-36-70 8-20 14 13 24 72" fill="url(#steel)" stroke="#c1c0c7" stroke-width="2"/><path d="m28 227 16 9m152 0 16-9" stroke="#d17982" stroke-width="4"/>
+ <path d="M88 248h64v13H88Z" fill="#65483d" stroke="#b89470"/><path d="m120 242 10 12-10 12-10-12Z" fill="#a55860"/><use href="#frame"/>
+ </symbol>
+ <symbol id="portrait-warlock" viewBox="0 0 240 300">
+ <rect width="240" height="300" fill="#11121e"/><ellipse cx="120" cy="110" rx="119" ry="137" fill="url(#purple)"/>
+ <g fill="none" stroke="#ae91ef" opacity=".55"><circle cx="120" cy="94" r="66" stroke-dasharray="3 5"/><path d="m120 24 61 106H59Zm0 140L59 58h122Z"/></g>
+ <path d="m80 113-49 45-15 134h208l-15-134-49-45Z" fill="#262039" stroke="#594572" stroke-width="2"/>
+ <path d="m85 120-50 17-16 35 55 17 25-44m56-25 50 17 16 35-55 17-25-44" fill="url(#voidsteel)" stroke="#a58acb" stroke-width="2"/><path d="m31 148 12-34 23 31m143 3-12-34-23 31" fill="#3b2c52" stroke="#b59ae7"/>
+ <path d="m83 143 37 17 37-17 13 60-27 87h-46l-27-87Z" fill="url(#voidsteel)" stroke="#866cb3"/><path d="M120 164 140 199l-20 32-20-32Z" fill="#221b36" stroke="#b9a0f9" stroke-width="2"/><path d="m120 181 9 18-9 18-9-18Z" fill="#cab0ff"/>
+ <path d="m80 102 9-43 31-26 31 26 9 43-20 33-20 12-20-12Z" fill="#332644" stroke="#ab8bdc" stroke-width="2"/><path d="m120 48-27 41 4 28 23 21 23-21 4-28Z" fill="#10101d"/><path d="m97 95 16 4-14 5m44-9-16 4 14 5" fill="#e2ceff"/><path d="m120 108-5 11h10" stroke="#9d81db" fill="none"/>
+ <path d="M199 289V102" stroke="#9377bd" stroke-width="5"/><path d="m199 56 17 28-17 30-17-30Z" fill="#b69bf8" stroke="#e7d9ff" stroke-width="2"/><ellipse cx="199" cy="85" rx="27" ry="35" fill="none" stroke="#9974e5" opacity=".6"/>
+ <g fill="#c6a6ff"><path d="m32 220 5-13 5 13-5 13Z"/><path d="m63 248 4-10 4 10-4 10Z"/><path d="m23 265 3-8 3 8-3 8Z"/></g><use href="#frame"/>
+ </symbol>
+ <symbol id="dungeon-crypt" viewBox="0 0 480 240">
+ <rect width="480" height="240" fill="#11151d"/><ellipse cx="240" cy="100" rx="200" ry="160" fill="url(#amber)"/>
+ <path d="M0 0h480v240H0Z M144 240V104Q144 34 240 10q96 24 96 94v136Z" fill="url(#stone)" fill-rule="evenodd"/>
+ <path d="M158 240V105Q158 48 240 26q82 22 82 79v135M126 240V98Q126 18 240 0q114 18 114 98v142" stroke="#78694f" stroke-width="3" fill="none"/>
+ <path d="M201 240V110q0-31 39-55 39 24 39 55v130Z" fill="#111018" stroke="#b89a64" stroke-width="2"/><path d="M214 116v124m13-145v145m13-153v153m13-145v145m13-124v124" stroke="#65523a" stroke-width="3"/>
+ <path d="m0 240 240-85 240 85M70 240l170-85 170 85M160 240l80-85 80 85" stroke="#5b5148" stroke-width="1" fill="none"/>
+ <g fill="#292b34" stroke="#726149"><path d="M34 0h36v240H34Z"/><path d="M410 0h36v240h-36Z"/><path d="M80 45h34v195H80Z"/><path d="M366 45h34v195h-34Z"/></g>
+ <g fill="#f3bd69"><path d="M97 94q-17-20 0-39 18 20 0 39"/><path d="M383 94q-17-20 0-39 18 20 0 39"/></g><g stroke="#8d6840" stroke-width="5"><path d="M97 94v21M383 94v21"/></g>
+ </symbol>
+ <symbol id="dungeon-ashen" viewBox="0 0 480 240">
+ <rect width="480" height="240" fill="#170f14"/><ellipse cx="240" cy="130" rx="260" ry="170" fill="url(#red)"/>
+ <path d="M0 0 90 0 144 66 100 104 150 240H0Zm480 0h-90l-54 66 44 38-50 136h150Z" fill="#25212a" stroke="#62454a"/>
+ <path d="M126 240 185 100 240 20 295 100 354 240Z" fill="#1b1b23" stroke="#a65546" stroke-width="3"/>
+ <path d="M189 240V120l51-69 51 69v120Z" fill="#0e0e16" stroke="#cb7450" stroke-width="2"/>
+ <path d="M0 224 112 191 189 216 265 176 353 200 480 163v77H0Z" fill="#4a272a"/><path d="m0 224 112-33 77 25 76-40 88 24 127-37" fill="none" stroke="#ef8b53" stroke-width="3"/><path d="m0 236 135-19 75 12 112-18 158 12" stroke="#f9b66b" stroke-width="2" fill="none"/>
+ <g fill="#f2a268"><circle cx="112" cy="66" r="2"/><circle cx="345" cy="49" r="3"/><circle cx="220" cy="155" r="2"/><circle cx="384" cy="129" r="2"/><circle cx="63" cy="156" r="2"/></g>
+ </symbol>
+ <symbol id="dungeon-void" viewBox="0 0 480 240">
+ <rect width="480" height="240" fill="#10101d"/><ellipse cx="240" cy="100" rx="220" ry="170" fill="url(#purple)"/>
+ <g fill="#211c34" stroke="#695388" stroke-width="2"><path d="M0 240 30 50 70 100 110 26 140 240Z"/><path d="M340 240 370 26 410 100 450 50 480 240Z"/><path d="m153 240 22-113 65-91 65 91 22 113Z"/></g>
+ <circle cx="240" cy="118" r="53" fill="#100d1a" stroke="#b49ae9" stroke-width="3"/><circle cx="240" cy="118" r="45" fill="url(#purple)" stroke="#7555b7" stroke-dasharray="3 5"/><path d="m240 63 47 81h-94Zm0 110-47-81h94Z" fill="none" stroke="#9b7cdd" opacity=".8"/>
+ <path d="m130 240 110-66 110 66M185 240l55-66 55 66" stroke="#8d70bd" fill="none" opacity=".6"/><path d="M240 87 256 118l-16 31-16-31Z" fill="#dfc7ff" opacity=".82"/>
+ </symbol>
+ <symbol id="boss-hollow" viewBox="0 0 240 300">
+ <rect width="240" height="300" fill="#11141a"/><ellipse cx="120" cy="120" rx="116" ry="145" fill="url(#amber)"/><path d="m65 124-44 49-8 117h214l-8-117-44-49" fill="#262530" stroke="#88744c"/>
+ <path d="m78 142-42 7-15 36 52 12 29-30m60-25 42 7 15 36-52 12-29-30" fill="url(#steel)" stroke="#b69a62" stroke-width="3"/>
+ <path d="m80 147 40 16 40-16 13 54-23 89H90l-23-89Z" fill="url(#steel)" stroke="#b69a62"/><path d="m120 168 20 34-20 22-20-22Z" fill="#171922" stroke="#d6b879"/>
+ <path d="m87 75 33-17 33 17-4 48-29 26-29-26Z" fill="#b6ab92" stroke="#e0c6a0" stroke-width="2"/><path d="m95 90 18 5-4 12-14-4Zm50 0-18 5 4 12 14-4Z" fill="#080b12"/><path d="m101 97 8 2m22 0 8-2" stroke="#e8b86a" stroke-width="3"/><path d="m120 105-6 13h12Z" fill="#3c3431"/><path d="M103 124h34m-28 0v10m11-10v13m11-13v10" stroke="#554b40" stroke-width="2"/>
+ <path d="m83 80-10-45 25 22 22-39 22 39 25-22-10 45Z" fill="url(#gold)" stroke="#f0d79a" stroke-width="2"/><path d="m120 47 7 13-7 13-7-13Z" fill="#572e3c"/>
+ <path d="M190 281V97l8-32 8 32v184" fill="url(#steel)" stroke="#d2ba83" stroke-width="2"/><path d="M180 205h36" stroke="#d4af60" stroke-width="5"/><use href="#frame"/>
+ </symbol>
+ <symbol id="item-blade" viewBox="0 0 96 96"><rect x="2" y="2" width="92" height="92" rx="8" fill="#101b2b" stroke="#527fa8"/><ellipse cx="50" cy="44" rx="44" ry="43" fill="url(#amber)"/><path d="m21 76 9-21 42-40 10-3-3 11-43 43-11 18Z" fill="url(#steel)" stroke="#c8d7e8" stroke-width="2"/><path d="m28 56 13 13-6 6-13-13Z" fill="url(#gold)"/><path d="m22 74 7 7-8 8-8-8Z" fill="#886642"/></symbol>
+ <symbol id="item-shield" viewBox="0 0 96 96"><rect x="2" y="2" width="92" height="92" rx="8" fill="#101b2b" stroke="#527fa8"/><path d="m22 20 26-8 26 8 10 22-16 9-3 33H31l-3-33-16-9Z" fill="url(#steel)" stroke="#a2b8d1" stroke-width="2"/><path d="m48 26 13 12-13 18-13-18Z" fill="#182235" stroke="#d4af60"/><path d="M32 69h32M31 74h34" stroke="#91a4b8"/></symbol>
+ <symbol id="item-crown" viewBox="0 0 96 96"><rect x="2" y="2" width="92" height="92" rx="8" fill="#211a35" stroke="#9773cc"/><circle cx="48" cy="47" r="40" fill="url(#purple)"/><path d="m15 26 17 14 16-25 16 25 17-14-9 44H24Z" fill="url(#gold)" stroke="#f2d69b" stroke-width="2"/><path d="m48 43 9 12-9 12-9-12Z" fill="#a77af3" stroke="#e2c8ff"/></symbol>
+ <symbol id="item-vault" viewBox="0 0 96 96"><rect x="2" y="2" width="92" height="92" rx="8" fill="#211a35" stroke="#9773cc"/><circle cx="48" cy="47" r="42" fill="url(#purple)"/><path d="m48 8 12 17-6 42-6 10-6-10-6-42Z" fill="url(#voidsteel)" stroke="#d8baff" stroke-width="2"/><path d="M48 15v56m-17-5h34" stroke="#d4af60" stroke-width="3"/><path d="M45 77h6v12h-6Z" fill="#e4c580"/></symbol>
+</defs></svg>
