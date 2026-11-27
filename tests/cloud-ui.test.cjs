@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const html=fs.readFileSync('cloud.html','utf8'),css=fs.readFileSync('obsidian.css','utf8'),source=html.match(/<script>\s*('use strict';[\s\S]*?)<\/script>/)[1];
 function setup(){
- const ids=new Map();class El{constructor(){this.hidden=false;this.disabled=false;this.dataset={};this.attrs={};this.children=[];this.textContent='';this.value='';this.elements=[]}append(...a){this.children.push(...a)}replaceChildren(){this.children=[];this.textContent=''}setAttribute(k,v){this.attrs[k]=v}removeAttribute(k){delete this.attrs[k]}addEventListener(k,f){this[k]=f}reportValidity(){return true}}
+ const ids=new Map();class El{constructor(){this.hidden=false;this.disabled=false;this.dataset={};this.attrs={};this.children=[];this.textContent='';this.value='';this.elements=[]}append(...a){this.children.push(...a)}replaceChildren(...nodes){this.children=[...nodes];this.textContent=''}setAttribute(k,v){this.attrs[k]=v}removeAttribute(k){delete this.attrs[k]}addEventListener(k,f){this[k]=f}reportValidity(){return true}}
  for(const m of html.matchAll(/\bid="([^"]+)"/g)){assert.ok(!ids.has(m[1]),'duplicate id '+m[1]);ids.set(m[1],new El())}
  const screens=['home','battle','armory','ranks','vault','profile'].map(screen=>Object.assign(new El(),{dataset:{screen}}));
  const nav=['home','battle','armory','ranks','vault'].map(go=>Object.assign(new El(),{dataset:{go}}));
