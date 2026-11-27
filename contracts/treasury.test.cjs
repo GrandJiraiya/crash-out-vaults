@@ -16,3 +16,28 @@ test('deployment on Base mainnet chain ID is rejected',async t=>{const f=await f
 test('principal-only lock returns exact deposit after maturity, once',async t=>{const f=await fixture(t),token=await f.deploy('VaultTestToken'),lock=await f.deploy('VaultTestLock',[await token.getAddress()]);const a=await f.alice.getAddress(),l=await lock.getAddress();await tx(token.transfer(a,units(100)));await tx(token.connect(f.alice).approve(l,units(100)));await rejects(lock.connect(f.alice).lock(0,7));await rejects(lock.connect(f.alice).lock(units(100),8));await tx(lock.connect(f.alice).lock(units(100),7));assert.equal(await lock.totalLocked(),units(100));assert.equal(await token.balanceOf(a),0n);await rejects(lock.connect(f.alice).lock(units(1),7));await rejects(lock.connect(f.alice).release());await rejects(lock.connect(f.bob).release());await f.advance(7*day+1);await tx(lock.connect(f.alice).release({gasLimit:200000}));assert.equal(await token.balanceOf(a),units(100));assert.equal(await lock.totalLocked(),0n);await rejects(lock.connect(f.alice).release())});
 test('unfunded or unauthorized allocations cannot be published',async t=>{const f=await fixture(t),token=await f.deploy('VaultTestToken'),vault=await f.deploy('VaultTestRewards',[await token.getAddress(),await f.owner.getAddress()]),a=await f.alice.getAddress();await rejects(vault.connect(f.alice).publish(week,[a],[units(10)]));await rejects(vault.publish(week,[a],[units(10)]));assert.equal((await vault.epochs(week)).published,false);assert.equal(await vault.totalReserved(),0n)});
 test('fully funded immutable allocations, claims and expired refunds conserve balances',async t=>{const f=await fixture(t),token=await f.deploy('VaultTestToken'),vault=await f.deploy('VaultTestRewards',[await token.getAddress(),await f.owner.getAddress()]);const a=await f.alice.getAddress(),b=await f.bob.getAddress(),v=await vault.getAddress();await tx(token.approve(v,units(100)));await rejects(vault.publish(week,[a,a],[units(10),units(10)]));await rejects(vault.publish(week+1,[a],[units(10)]));await rejects(vault.publish(week+7*day,[a],[units(10)]));await tx(vault.publish(week,[a,b],[units(40),units(60)]));assert.equal(await vault.totalReserved(),units(100));assert.equal(await token.balanceOf(v),units(100));await rejects(vault.publish(week,[a],[units(1)]));await rejects(vault.refundExpired(week));await rejects(vault.claim(week));await tx(vault.connect(f.alice).claim(week));assert.equal(await token.balanceOf(a),units(40));assert.equal(await vault.totalReserved(),units(60));await rejects(vault.connect(f.alice).claim(week));await f.advance(30*day+1);await rejects(vault.connect(f.bob).claim(week));const prior=await token.balanceOf(await f.owner.getAddress());await tx(vault.connect(f.bob).refundExpired(week,{gasLimit:200000}));assert.equal(await token.balanceOf(await f.owner.getAddress()),prior+units(60));assert.equal(await token.balanceOf(v),0n);assert.equal(await vault.totalReserved(),0n);await rejects(vault.refundExpired(week))});
+
+test('unsigned Sepolia plan predicts deployment addresses and verifier rejects modified code',async t=>{
+ const {compile,plan,runtimeMatches,verify}=require('./gateway.cjs');
+ const f=await fixture(t,84532),from=await f.owner.getAddress(),a=compile(),p=await plan({deployer:from,nonce:0,artifacts:a});
+ assert.equal(p.chainId,84532);assert.equal(p.deployments.length,3);assert.equal(p.deployments[2].nonce,2);
+ await assert.rejects(plan({deployer:from,nonce:0,chainId:8453,artifacts:a}));
+ const token=await f.deploy('VaultTestToken'),lock=await f.deploy('VaultTestLock',[await token.getAddress()]),reward=await f.deploy('VaultTestRewards',[await token.getAddress(),from]);
+ const contracts=[token,lock,reward];for(let i=0;i<3;i++){assert.equal(await contracts[i].getAddress(),p.deployments[i].address);assert.equal(contracts[i].deploymentTransaction().data,p.deployments[i].data)}
+ for(let i=0;i<13;i++)await f.raw.request({method:'evm_mine',params:[]});
+ const provider=new BrowserProvider(f.raw);const hashes=contracts.map(c=>c.deploymentTransaction().hash);
+ const manifest=await verify(provider,{deployer:from,nonce:0,hashes},a);
+ assert.equal(manifest.contracts.length,3);assert.equal(manifest.contracts[0].address,await token.getAddress());
+ const code=await provider.getCode(await lock.getAddress());assert.equal(runtimeMatches(code,a.VaultTestLock),true);assert.equal(runtimeMatches('0x00'+code.slice(4),a.VaultTestLock),false);
+ await assert.rejects(verify(provider,{deployer:from,nonce:0,hashes:[hashes[1],hashes[0],hashes[2]]},a));
+});
+test('static-call simulations do not transfer tokens or create lock positions',async t=>{
+ const f=await fixture(t,84532),token=await f.deploy('VaultTestToken'),lock=await f.deploy('VaultTestLock',[await token.getAddress()]);const a=await f.alice.getAddress(),l=await lock.getAddress();
+ await tx(token.transfer(a,units(50)));
+ await assert.rejects(lock.connect(f.alice).lock.staticCall(units(10),7));
+ await tx(token.connect(f.alice).approve(l,units(10)));
+ await lock.connect(f.alice).lock.staticCall(units(10),7);
+ assert.equal((await lock.positions(a)).amount,0n);assert.equal(await token.balanceOf(a),units(50));assert.equal(await token.allowance(a,l),units(10));
+ await tx(lock.connect(f.alice).lock(units(10),7));await assert.rejects(lock.connect(f.alice).release.staticCall());
+ await f.advance(7*day+1);await lock.connect(f.alice).release.staticCall();assert.equal((await lock.positions(a)).amount,units(10));
+});
