@@ -1,0 +1,28 @@
+name: Dependency advisory scan
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/dependency-review.yml'
+      - 'package.json'
+      - 'contracts/package.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        directory: ['.', 'contracts']
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - run: npm audit --audit-level=high
