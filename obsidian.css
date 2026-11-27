@@ -7,3 +7,6 @@
 
 /* Audio settings */
 .audio-toggle{white-space:nowrap;font-size:12px;padding:8px 10px;margin-left:auto}.audio-panel{display:grid;gap:12px}.audio-panel h2{margin:0}.audio-control{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center}.audio-control label{font-weight:650}.audio-control output{font-variant-numeric:tabular-nums;color:var(--gold-light)}.audio-control input[type=range]{grid-column:1/-1;accent-color:var(--gold);padding:0;background:transparent;border:0;min-height:44px;margin:0}.audio-panel .button-row{margin:0}@media(max-width:640px){.masthead{gap:5px}.audio-toggle{font-size:10px;min-width:58px;padding:8px 5px}.profile-button{font-size:11px;padding:8px 6px}.wordmark{font-size:clamp(15px,4vw,21px)}.brand .eyebrow{font-size:8px;letter-spacing:.1em}.crest{width:25px;height:31px}}
+
+/* Treasury development status: deliberately read-only. */
+.treasury-preview{display:grid;gap:14px}.treasury-preview h2{margin:0}.treasury-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.treasury-grid strong{display:block;font-size:clamp(16px,3vw,23px);overflow-wrap:anywhere}.treasury-grid small{display:block;color:var(--muted);font-size:11px}.treasury-preview .status-note{margin:0;border-left-color:#d4af60}
