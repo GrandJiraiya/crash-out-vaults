@@ -61,8 +61,9 @@ function createStore({url,serverKey,publishableKey,fetcher=fetch}){
  const base=new URL(url);if(base.protocol!=='https:'||base.pathname!=='/'||base.username||base.password)throw Error('Invalid Supabase URL');
  async function request(path,options={},accessToken=null){
   const res=await fetcher(new URL(path,base),{...options,headers:{apikey:accessToken?publishableKey:serverKey,Authorization:'Bearer '+(accessToken||serverKey),'Content-Type':'application/json',...options.headers}});
-  if(!res.ok)throw Object.assign(Error(accessToken?'Authentication failed':'Database request failed'),{status:accessToken?401:502});
-  return res.status===204?null:res.json();
+  if(!res.ok){if(!accessToken&&res.status===429)throw Object.assign(Error('Action rate limit; retry shortly'),{status:429});throw Object.assign(Error(accessToken?'Authentication failed':'Database request failed'),{status:accessToken?401:502});}
+  if(res.status===204||options.headers?.Prefer?.split(',').includes('return=minimal'))return null;
+  return res.json();
  }
  async function identity(token){
   if(typeof token!=='string'||!token||token.length>8192)throw Object.assign(Error('Authentication required'),{status:401});
@@ -114,5 +115,5 @@ Deno.serve(async req=>{
  let command;try{command=JSON.parse(new TextDecoder().decode(bytes))}catch{return reply(400,{error:'Invalid JSON'})}
  if(command?.action==='leaderboard_listing')return reply(200,{leaderboard:await store.leaderboard(token,command.listed===true?true:command.listed===false?false:null)});
  return reply(200,{state:await store.act(token,command)});
- }catch(e){return reply([400,401,409,502].includes(e.status)?e.status:500,{error:[400,401,409].includes(e.status)?e.message:'Service unavailable'})}
+ }catch(e){return reply([400,401,409,429,502].includes(e.status)?e.status:500,{error:[400,401,409,429].includes(e.status)?e.message:'Service unavailable'})}
 });
