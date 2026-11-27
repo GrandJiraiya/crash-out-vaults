@@ -92,7 +92,7 @@ function createStore({url,serverKey,publishableKey,fetcher=fetch}){
 
 
 
-const allowed=new Set(['http://127.0.0.1:8080','http://localhost:8080',...(Deno.env.get('VAULT_ALLOWED_ORIGINS')||'').split(',').map(s=>s.trim()).filter(Boolean)]);
+const allowed=new Set(['https://crash-out-vaults-9npv1gqhq-crashoutcrypto.vercel.app','https://crash-out-vaults-crashoutcrypto.vercel.app','http://127.0.0.1:8080','http://localhost:8080',...(Deno.env.get('VAULT_ALLOWED_ORIGINS')||'').split(',').map(s=>s.trim()).filter(Boolean)]);
 Deno.serve(async req=>{
  const origin=req.headers.get('origin');
  const headers={'Content-Type':'application/json','Cache-Control':'no-store','Vary':'Origin','X-Content-Type-Options':'nosniff'};
